@@ -14,19 +14,10 @@
     </div>
       <p>
         Explication sur la page</p>
-      <asp:Calendar ID="calendrierEvenement" runat="server"></asp:Calendar>
-      <asp:Panel ID="pnlEvenement" runat="server">
+      <asp:Calendar ID="calendrierEvenement" runat="server" OnDayRender="calendrierEvenement_DayRender" OnSelectionChanged="calendrierEvenement_SelectionChanged" ShowNextPrevMonth="False"></asp:Calendar>
+      <asp:Panel ID="pnlEvenement" runat="server" Enabled="False">
         <asp:Label ID="lblJeu" runat="server" Text="Jeu : "></asp:Label>
         <asp:DropDownList ID="ddlJeu" runat="server">
-          <asp:ListItem>League of Legends</asp:ListItem>
-          <asp:ListItem>Warcraft III</asp:ListItem>
-          <asp:ListItem>Starcraft II</asp:ListItem>
-          <asp:ListItem>Super Smash Bros Brawl</asp:ListItem>
-          <asp:ListItem>Minecraft : Hunger Games</asp:ListItem>
-          <asp:ListItem>Minecraft : CTF</asp:ListItem>
-          <asp:ListItem>Dota 2</asp:ListItem>
-          <asp:ListItem>Half-Life 2</asp:ListItem>
-          <asp:ListItem>Team Fortress II</asp:ListItem>
         </asp:DropDownList>
         <asp:Label ID="lblPlancher" runat="server" Text="Plancher : "></asp:Label>
         <asp:DropDownList ID="ddlPlancher" runat="server">
