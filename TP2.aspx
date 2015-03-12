@@ -10,10 +10,18 @@
 <body>
     <form id="form1" runat="server">
     <div>
-      <h1>YOLO</h1>
+      <h1>GAME ON!</h1>
     </div>
       <p>
-        Explication sur la page</p>
+        Explication sur la page: Cliquez sur la date où le toournoi se déroule pour commencer,
+          les autres options s'afficheront ensuite. Pour intégrer la compétition, choisissez
+          votre jeu, le plancher où vous allez disputer votre match et l'heure à laquelle
+          cela se passe. Si vous changez d'avis ou vous souhaitez vous retirer, cliquer sur
+          modifier et sélectionner les évènements que vous voulez changer. Dans le cas d'un
+          abandon, sélectionnez les les activités et appuyez sur le bouton supprimer. Pour
+          terminer votre inscription, remplissez les informations requisent et appuyez sur
+          confirmer.
+      </p>
       <asp:Calendar ID="calendrierEvenement" runat="server" OnDayRender="calendrierEvenement_DayRender" OnSelectionChanged="calendrierEvenement_SelectionChanged" ShowNextPrevMonth="False"></asp:Calendar>
         <asp:Label ID="lblEvenement" runat="server"></asp:Label>
       <asp:Panel ID="pnlEvenement" runat="server" Enabled="False">
