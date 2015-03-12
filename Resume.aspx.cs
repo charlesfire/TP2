@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class Resume : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        Session["Prénom"] = "jsdfjd";
+        Session["Nom"] = "yolo";
+        Session["Numéro"] = "123";
+        //ton code
+
+        lblPrenom.Text = (string)Session["Prénom"];
+        lblNom.Text = (string)Session["Nom"];
+        lblNumero.Text = (string)Session["Numéro"];
+
+    }
+}
