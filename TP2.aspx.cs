@@ -4,24 +4,29 @@ using System.Collections.Generic;
 public partial class TP2 : System.Web.UI.Page
 {
 	#region Charles
-	private DateTime d1 = new DateTime(2015, 3, 14);
-	private DateTime d2 = new DateTime(2015, 3, 15);
-	private DateTime d3 = new DateTime(2015, 3, 16);
 
-	private SortedDictionary<string, int> test = new SortedDictionary<string,int>();
+	private SortedDictionary<DateTime, string> datesEvenement = new SortedDictionary<DateTime,string>();
+
+	private SortedDictionary<string, int> planchersParJeu = new SortedDictionary<string,int>();
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
-		test.Add("League of Legends : Summoner's Rift", 3);
-		test.Add("League of Legends : Crystal Scar", 2);
+		datesEvenement.Add(new DateTime(2015, 3, 14), "FragFest Québec");
+		datesEvenement.Add(new DateTime(2015, 3, 15), "Stream Open");
+		datesEvenement.Add(new DateTime(2015, 3, 16), "Stream Open");
+
+		planchersParJeu.Add("League of Legends : Summoner's Rift", 3);
+		planchersParJeu.Add("League of Legends : Crystal Scar", 2);
 
 		if (ddlJeu.Items.Count == 0)
 		{
-			foreach (string jeu in test.Keys)
+			foreach (string jeu in planchersParJeu.Keys)
 			{
 				ddlJeu.Items.Add(jeu);
 			}
 		}
+
+		MettreAJourPlancher();
 	}
 
 	protected void btnModifier_Click(object sender, EventArgs e)
@@ -51,17 +56,43 @@ public partial class TP2 : System.Web.UI.Page
 	{
 		e.Day.IsSelectable = false;
 
-		if (e.Day.Date.ToShortDateString() == d1.ToShortDateString() ||
-			e.Day.Date.ToShortDateString() == d2.ToShortDateString() ||
-			e.Day.Date.ToShortDateString() == d3.ToShortDateString())
+		foreach (DateTime date in datesEvenement.Keys)
 		{
-			e.Day.IsSelectable = true;
+			if (e.Day.Date.ToShortDateString() == date.ToShortDateString())
+			{
+				e.Day.IsSelectable = true;
+			}
 		}
 	}
 
 	protected void calendrierEvenement_SelectionChanged(object sender, EventArgs e)
 	{
 		pnlEvenement.Enabled = true;
+
+		string nomEvenement = "";
+		if (datesEvenement.TryGetValue(calendrierEvenement.SelectedDate, out nomEvenement))
+		{
+			lblEvenement.Text = nomEvenement;
+		}
+	}
+
+	protected void ddlJeu_SelectedIndexChanged(object sender, EventArgs e)
+	{
+		MettreAJourPlancher();
+	}
+
+	private void MettreAJourPlancher()
+	{
+		ddlPlancher.Items.Clear();
+
+		int nombreDePlancher = 0;
+		if (planchersParJeu.TryGetValue(ddlJeu.SelectedValue, out nombreDePlancher))
+		{
+			for (int i = 1; i <= nombreDePlancher; i++)
+			{
+				ddlPlancher.Items.Add(i.ToString());
+			}
+		}
 	}
 	#endregion
 

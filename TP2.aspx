@@ -15,15 +15,22 @@
       <p>
         Explication sur la page</p>
       <asp:Calendar ID="calendrierEvenement" runat="server" OnDayRender="calendrierEvenement_DayRender" OnSelectionChanged="calendrierEvenement_SelectionChanged" ShowNextPrevMonth="False"></asp:Calendar>
+        <asp:Label ID="lblEvenement" runat="server"></asp:Label>
       <asp:Panel ID="pnlEvenement" runat="server" Enabled="False">
         <asp:Label ID="lblJeu" runat="server" Text="Jeu : "></asp:Label>
-        <asp:DropDownList ID="ddlJeu" runat="server">
+        <asp:DropDownList ID="ddlJeu" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlJeu_SelectedIndexChanged">
         </asp:DropDownList>
         <asp:Label ID="lblPlancher" runat="server" Text="Plancher : "></asp:Label>
-        <asp:DropDownList ID="ddlPlancher" runat="server">
+        <asp:DropDownList ID="ddlPlancher" runat="server" AutoPostBack="True">
         </asp:DropDownList>
         <asp:Label ID="lblHeure" runat="server" Text="Heure : "></asp:Label>
         <asp:DropDownList ID="ddlHeure" runat="server">
+        	<asp:ListItem>13h00</asp:ListItem>
+			<asp:ListItem>15h00</asp:ListItem>
+			<asp:ListItem>17h00</asp:ListItem>
+			<asp:ListItem>19h00</asp:ListItem>
+			<asp:ListItem>21h00</asp:ListItem>
+			<asp:ListItem>23h00</asp:ListItem>
         </asp:DropDownList>
         <asp:Button ID="btnAjouter" runat="server" Text="Ajouter" />
           <br />
@@ -40,7 +47,7 @@
 			  <asp:TextBox ID="txtbPrenom" runat="server"></asp:TextBox>
 			  <br />
 			  <asp:Label ID="lblNom" runat="server" Text="Nom :"></asp:Label>
-			  <asp:TextBox ID="txtbPrenom0" runat="server"></asp:TextBox>
+			  <asp:TextBox ID="txtbNom" runat="server"></asp:TextBox>
 			  <br />
 			  <asp:Label ID="lblNoMembre" runat="server" Text="Numéro de membre :"></asp:Label>
 			  <asp:TextBox ID="txtbNoMembre" runat="server"></asp:TextBox>
