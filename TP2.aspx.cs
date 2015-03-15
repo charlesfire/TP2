@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.UI.WebControls;
 
 public partial class TP2 : System.Web.UI.Page
 {
@@ -8,6 +9,8 @@ public partial class TP2 : System.Web.UI.Page
 	private SortedDictionary<DateTime, string> datesEvenement = new SortedDictionary<DateTime,string>();
 
 	private SortedDictionary<string, int> planchersParJeu = new SortedDictionary<string,int>();
+
+	private static List<Inscription> inscriptions = new List<Inscription>();
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
@@ -24,6 +27,11 @@ public partial class TP2 : System.Web.UI.Page
 			{
 				ddlJeu.Items.Add(jeu);
 			}
+		}
+
+		if (ddlHeure.Items.Count == 0)
+		{
+			GenererHeuresDisponibles();
 		}
 
 		MettreAJourPlancher();
@@ -46,7 +54,9 @@ public partial class TP2 : System.Web.UI.Page
 	{
 		while (cblInscriptions.SelectedItem != null)
 		{
-			cblInscriptions.Items.Remove(cblInscriptions.SelectedItem);
+			inscriptions.RemoveAt(cblInscriptions.SelectedIndex);
+			Console.WriteLine(inscriptions.ToString());
+			cblInscriptions.Items.RemoveAt(cblInscriptions.SelectedIndex);
 		}
 		btnModifier.Text = "Modifier";
 		pnlEditionInscription.Enabled = false;
@@ -93,6 +103,40 @@ public partial class TP2 : System.Web.UI.Page
 				ddlPlancher.Items.Add(i.ToString());
 			}
 		}
+	}
+
+	private void GenererHeuresDisponibles()
+	{
+		ddlHeure.Items.Clear();
+		DateTime heureDisponible = new DateTime(1, 1, 1, 13, 0, 0);
+		heureDisponible.AddHours(13);
+		ddlHeure.Items.Add(heureDisponible.ToShortTimeString());
+		heureDisponible = heureDisponible.AddHours(2);
+		ddlHeure.Items.Add(heureDisponible.ToShortTimeString());
+		heureDisponible = heureDisponible.AddHours(2);
+		ddlHeure.Items.Add(heureDisponible.ToShortTimeString());
+		heureDisponible = heureDisponible.AddHours(2);
+		ddlHeure.Items.Add(heureDisponible.ToShortTimeString());
+		heureDisponible = heureDisponible.AddHours(2);
+		ddlHeure.Items.Add(heureDisponible.ToShortTimeString());
+	}
+
+	protected void btnAjouter_Click(object sender, EventArgs e)
+	{
+		Inscription nouvelleInscription = new Inscription();
+
+		nouvelleInscription.SetEvenement(lblEvenement.Text);
+		nouvelleInscription.SetJeu(ddlJeu.SelectedValue);
+		nouvelleInscription.SetPlancher(int.Parse(ddlPlancher.SelectedValue));
+
+		DateTime date = new DateTime();
+		if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
+		{
+			nouvelleInscription.SetHeure(new DateTime(calendrierEvenement.SelectedDate.Year, calendrierEvenement.SelectedDate.Month,
+														calendrierEvenement.SelectedDate.Day, date.Hour, date.Minute, date.Second));
+		}
+		cblInscriptions.Items.Add(nouvelleInscription.ToString());
+		inscriptions.Add(nouvelleInscription);
 	}
 	#endregion
 
