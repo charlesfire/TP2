@@ -128,6 +128,7 @@ public partial class TP2 : System.Web.UI.Page
 		nouvelleInscription.SetEvenement(lblEvenement.Text);
 		nouvelleInscription.SetJeu(ddlJeu.SelectedValue);
 		nouvelleInscription.SetPlancher(int.Parse(ddlPlancher.SelectedValue));
+		Response.Output.WriteLine(ddlPlancher.SelectedValue);
 
 		DateTime date = new DateTime();
 		if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
@@ -137,6 +138,19 @@ public partial class TP2 : System.Web.UI.Page
 		}
 		cblInscriptions.Items.Add(nouvelleInscription.ToString());
 		inscriptions.Add(nouvelleInscription);
+	}
+
+	protected void btnAnnuler_Click(object sender, EventArgs e)
+	{
+		Session["ViewState"] = null;
+		Response.Redirect("TP2.aspx");
+	}
+
+	protected void btnConfirmer_Click(object sender, EventArgs e)
+	{
+		Session["Nom"] = lblNom.Text;
+		Session["Prénom"] = lblPrenom.Text;
+		Response.Redirect("Resume.aspx");
 	}
 	#endregion
 
