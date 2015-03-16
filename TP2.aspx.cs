@@ -6,35 +6,32 @@ public partial class TP2 : System.Web.UI.Page
 {
 	#region Charles
 
-	private SortedDictionary<DateTime, string> datesEvenement = new SortedDictionary<DateTime,string>();
+	private static SortedDictionary<DateTime, string> datesEvenement = new SortedDictionary<DateTime,string>();
 
-	private SortedDictionary<string, int> planchersParJeu = new SortedDictionary<string,int>();
+	private static SortedDictionary<string, int> planchersParJeu = new SortedDictionary<string,int>();
 
 	private static List<Inscription> inscriptions = new List<Inscription>();
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
-		datesEvenement.Add(new DateTime(2015, 3, 14), "FragFest Québec");
-		datesEvenement.Add(new DateTime(2015, 3, 15), "Stream Open");
-		datesEvenement.Add(new DateTime(2015, 3, 16), "Stream Open");
-
-		planchersParJeu.Add("League of Legends : Summoner's Rift", 3);
-		planchersParJeu.Add("League of Legends : Crystal Scar", 2);
-
-		if (ddlJeu.Items.Count == 0)
+		if (!Page.IsPostBack)
 		{
+			datesEvenement.Add(new DateTime(2015, 3, 14), "FragFest Québec");
+			datesEvenement.Add(new DateTime(2015, 3, 15), "Stream Open");
+			datesEvenement.Add(new DateTime(2015, 3, 16), "Stream Open");
+
+			planchersParJeu.Add("League of Legends : Summoner's Rift", 3);
+			planchersParJeu.Add("League of Legends : Crystal Scar", 2);
+
 			foreach (string jeu in planchersParJeu.Keys)
 			{
 				ddlJeu.Items.Add(jeu);
 			}
-		}
 
-		if (ddlHeure.Items.Count == 0)
-		{
 			GenererHeuresDisponibles();
-		}
 
-		MettreAJourPlancher();
+			MettreAJourPlancher();
+		}
 	}
 
 	protected void btnModifier_Click(object sender, EventArgs e)
