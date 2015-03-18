@@ -145,8 +145,10 @@ public partial class TP2 : System.Web.UI.Page
 
 	protected void btnConfirmer_Click(object sender, EventArgs e)
 	{
-		Session["Nom"] = lblNom.Text;
-		Session["Prénom"] = lblPrenom.Text;
+		Session["Nom"] = txtbNom.Text;
+		Session["Prénom"] = txtbPrenom.Text;
+		Session["Numéro"] = txtbNoMembre.Text;
+		Session["Inscriptions"] = inscriptions;
 		Response.Redirect("Resume.aspx");
 	}
 	#endregion
