@@ -14,7 +14,7 @@ public partial class TP2 : System.Web.UI.Page
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
-		if (!Page.IsPostBack)
+		if (datesEvenement.Count == 0)
 		{
 			datesEvenement.Add(new DateTime(2015, 3, 14), "FragFest Québec");
 			datesEvenement.Add(new DateTime(2015, 3, 15), "Stream Open");
@@ -36,8 +36,9 @@ public partial class TP2 : System.Web.UI.Page
 
 	protected void btnModifier_Click(object sender, EventArgs e)
 	{
-		pnlEditionInscription.Enabled = !pnlEditionInscription.Enabled;
-		if (pnlEditionInscription.Enabled)
+		cblInscriptions.Enabled = !cblInscriptions.Enabled;
+		btnSuprimerSelection.Visible = cblInscriptions.Enabled;
+		if (cblInscriptions.Enabled)
 		{
 			btnModifier.Text = "Annuler";
 		}
@@ -56,7 +57,12 @@ public partial class TP2 : System.Web.UI.Page
 			cblInscriptions.Items.RemoveAt(cblInscriptions.SelectedIndex);
 		}
 		btnModifier.Text = "Modifier";
-		pnlEditionInscription.Enabled = false;
+		cblInscriptions.Enabled = false;
+		btnSuprimerSelection.Visible = false;
+		if (inscriptions.Count == 0)
+		{
+			btnModifier.Visible = false;
+		}
 	}
 
 	protected void calendrierEvenement_DayRender(object sender, System.Web.UI.WebControls.DayRenderEventArgs e)
@@ -74,7 +80,7 @@ public partial class TP2 : System.Web.UI.Page
 
 	protected void calendrierEvenement_SelectionChanged(object sender, EventArgs e)
 	{
-		pnlEvenement.Enabled = true;
+		pnlEvenement.Visible = true;
 
 		string nomEvenement = "";
 		if (datesEvenement.TryGetValue(calendrierEvenement.SelectedDate, out nomEvenement))
@@ -125,7 +131,6 @@ public partial class TP2 : System.Web.UI.Page
 		nouvelleInscription.SetEvenement(lblEvenement.Text);
 		nouvelleInscription.SetJeu(ddlJeu.SelectedValue);
 		nouvelleInscription.SetPlancher(int.Parse(ddlPlancher.SelectedValue));
-		Response.Output.WriteLine(ddlPlancher.SelectedValue);
 
 		DateTime date = new DateTime();
 		if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
@@ -135,6 +140,7 @@ public partial class TP2 : System.Web.UI.Page
 		}
 		cblInscriptions.Items.Add(nouvelleInscription.ToString());
 		inscriptions.Add(nouvelleInscription);
+		btnModifier.Visible = true;
 	}
 
 	protected void btnAnnuler_Click(object sender, EventArgs e)

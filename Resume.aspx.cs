@@ -40,4 +40,9 @@ public partial class Resume : System.Web.UI.Page
 			}
 		}
 	}
+
+	protected void btnRetour_Click(object sender, EventArgs e)
+	{
+		Response.Redirect("TP2.aspx");
+	}
 }
