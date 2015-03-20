@@ -22,6 +22,7 @@
 			</p>
 			<asp:Calendar ID="calendrierEvenement" runat="server" OnDayRender="calendrierEvenement_DayRender" OnSelectionChanged="calendrierEvenement_SelectionChanged" ShowNextPrevMonth="False">
 				<SelectedDayStyle BackColor="#084BD7" />
+				<SelectorStyle ForeColor="Red" />
 				<TitleStyle Font-Bold="True" />
 			</asp:Calendar>
 			<br />
@@ -39,15 +40,16 @@
 				</asp:DropDownList>
 				<asp:Button ID="btnAjouter" runat="server" Text="Ajouter" OnClick="btnAjouter_Click" CssClass="button" />
 				<br />
-				<asp:Panel ID="pnlEditionInscription" runat="server" CssClass="pnl">
-					<asp:CheckBoxList ID="cblInscriptions" runat="server" Enabled="False">
-					</asp:CheckBoxList>
-					<asp:Button ID="btnModifier" runat="server" CssClass="alignLeft button" OnClick="btnModifier_Click" Text="Modifier" Visible="False" />
-					<asp:Button ID="btnSuprimerSelection" runat="server" CssClass="alignLeft button" OnClick="btnSuprimerSelection_Click" Text="Suprimer la sélection" Visible="False" />
-				</asp:Panel>
 				<br />
 			</asp:Panel>
 			<asp:Panel ID="pnlInformations" runat="server" CssClass="pnl">
+				<asp:Panel ID="pnlEditionInscription" runat="server" CssClass="pnl" Visible="False">
+					<asp:Label ID="lblVosInscriptions" runat="server" CssClass="subTitles" Text="Vos inscriptions"></asp:Label>
+					<asp:CheckBoxList ID="cblInscriptions" runat="server" Enabled="False">
+					</asp:CheckBoxList>
+					<asp:Button ID="btnModifier" runat="server" CssClass="alignLeft button" OnClick="btnModifier_Click" Text="Modifier" />
+					<asp:Button ID="btnSuprimerSelection" runat="server" CssClass="alignLeft button" OnClick="btnSuprimerSelection_Click" Text="Suprimer la sélection" Visible="False" />
+				</asp:Panel>
 				<asp:Label ID="lblInformations" runat="server" CssClass="subTitles" Text="Informations :"></asp:Label>
 				<br />
 				<asp:Label ID="lblPrenom" runat="server" CssClass="informations" Text="Prénom :"></asp:Label>

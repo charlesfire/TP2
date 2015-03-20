@@ -6,9 +6,9 @@ public partial class TP2 : System.Web.UI.Page
 {
 	#region Charles
 
-	private static SortedDictionary<DateTime, string> datesEvenement = new SortedDictionary<DateTime,string>();
+	private SortedDictionary<DateTime, string> datesEvenement = new SortedDictionary<DateTime,string>();
 
-	private static SortedDictionary<string, int> planchersParJeu = new SortedDictionary<string,int>();
+	private SortedDictionary<string, int> planchersParJeu = new SortedDictionary<string,int>();
 
 	private static List<Inscription> inscriptions = new List<Inscription>();
 
@@ -22,7 +22,10 @@ public partial class TP2 : System.Web.UI.Page
 
 			planchersParJeu.Add("League of Legends : Summoner's Rift", 3);
 			planchersParJeu.Add("League of Legends : Crystal Scar", 2);
+		}
 
+		if (ddlJeu.Items.Count == 0)
+		{
 			foreach (string jeu in planchersParJeu.Keys)
 			{
 				ddlJeu.Items.Add(jeu);
@@ -31,6 +34,15 @@ public partial class TP2 : System.Web.UI.Page
 			GenererHeuresDisponibles();
 
 			MettreAJourPlancher();
+		}
+
+		if (inscriptions.Count != 0 && cblInscriptions.Items.Count == 0)
+		{
+			foreach (Inscription inscription in inscriptions)
+			{
+				cblInscriptions.Items.Add(inscription.ToString());
+			}
+			pnlEditionInscription.Visible = true;
 		}
 	}
 
@@ -61,7 +73,7 @@ public partial class TP2 : System.Web.UI.Page
 		btnSuprimerSelection.Visible = false;
 		if (inscriptions.Count == 0)
 		{
-			btnModifier.Visible = false;
+			pnlEditionInscription.Visible = false;
 		}
 	}
 
@@ -140,12 +152,13 @@ public partial class TP2 : System.Web.UI.Page
 		}
 		cblInscriptions.Items.Add(nouvelleInscription.ToString());
 		inscriptions.Add(nouvelleInscription);
-		btnModifier.Visible = true;
+		pnlEditionInscription.Visible = true;
 	}
 
 	protected void btnAnnuler_Click(object sender, EventArgs e)
 	{
 		Session["ViewState"] = null;
+		inscriptions.Clear();
 		Response.Redirect("TP2.aspx");
 	}
 
