@@ -36,13 +36,21 @@ public partial class TP2 : System.Web.UI.Page
 			MettreAJourPlancher();
 		}
 
-		if (inscriptions.Count != 0 && cblInscriptions.Items.Count == 0)
+		if (inscriptions.Count != cblInscriptions.Items.Count)
 		{
+			cblInscriptions.Items.Clear();
 			foreach (Inscription inscription in inscriptions)
 			{
 				cblInscriptions.Items.Add(inscription.ToString());
 			}
 			pnlEditionInscription.Visible = true;
+		}
+
+		if (Session["Prénom"] != null)
+		{
+			txtbPrenom.Text = (string)Session["Prénom"];
+			txtbNom.Text = (string)Session["Nom"];
+			txtbNoMembre.Text = (string)Session["Numéro"];
 		}
 	}
 
@@ -157,8 +165,8 @@ public partial class TP2 : System.Web.UI.Page
 
 	protected void btnAnnuler_Click(object sender, EventArgs e)
 	{
-		Session["ViewState"] = null;
 		inscriptions.Clear();
+		Session.Clear();
 		Response.Redirect("TP2.aspx");
 	}
 

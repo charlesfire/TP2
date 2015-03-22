@@ -53,16 +53,20 @@
 				<asp:Label ID="lblInformations" runat="server" CssClass="subTitles" Text="Informations :"></asp:Label>
 				<br />
 				<asp:Label ID="lblPrenom" runat="server" CssClass="informations" Text="Prénom :"></asp:Label>
-				<asp:TextBox ID="txtbPrenom" runat="server" CssClass="informations"></asp:TextBox>
+				<asp:TextBox ID="txtbPrenom" runat="server" CssClass="informations" ValidationGroup="validate"></asp:TextBox>
+				<asp:RequiredFieldValidator ID="rfvPrenom" runat="server" ControlToValidate="txtbPrenom" Display="None" ErrorMessage="Veuillez entrer votre prénom s.v.p. " SetFocusOnError="True" ValidationGroup="validate"></asp:RequiredFieldValidator>
 				<br />
 				<asp:Label ID="lblNom" runat="server" CssClass="informations" Text="Nom :"></asp:Label>
 				<asp:TextBox ID="txtbNom" runat="server" CssClass="informations"></asp:TextBox>
+				<asp:RequiredFieldValidator ID="rfvNom" runat="server" ControlToValidate="txtbNom" Display="None" ErrorMessage="Veuillez entrer votre nom s.v.p. " SetFocusOnError="True" ValidationGroup="validate"></asp:RequiredFieldValidator>
 				<br />
 				<asp:Label ID="lblNoMembre" runat="server" CssClass="informations" Text="Numéro de membre :"></asp:Label>
 				<asp:TextBox ID="txtbNoMembre" runat="server" CssClass="informations"></asp:TextBox>
+				<asp:RequiredFieldValidator ID="rfvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Veuillez entrer votre numéro de membre s.v.p. " ValidationGroup="validate"></asp:RequiredFieldValidator>
+				<asp:ValidationSummary ID="vsResumerValidation" runat="server" DisplayMode="List" ForeColor="Red" ValidationGroup="validate" />
 			</asp:Panel>
-			<asp:Button ID="btnConfirmer" runat="server" Text="Confirmer" OnClick="btnConfirmer_Click" CssClass="button" />
-			<asp:Button ID="btnAnnuler" runat="server" Text="Annuler" OnClick="btnAnnuler_Click" CssClass="button" />
+			<asp:Button ID="btnConfirmer" runat="server" Text="Confirmer" OnClick="btnConfirmer_Click" CssClass="button" ValidationGroup="validate" />
+			<asp:Button ID="btnAnnuler" runat="server" Text="Annuler" OnClick="btnAnnuler_Click" CssClass="button" EnableTheming="True" />
 		</div>
 	</form>
 </body>
