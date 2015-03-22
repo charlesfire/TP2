@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 
 public partial class TP2 : System.Web.UI.Page
@@ -46,11 +47,22 @@ public partial class TP2 : System.Web.UI.Page
 			pnlEditionInscription.Visible = true;
 		}
 
-		if (Session["Prénom"] != null)
+		if (!Page.IsPostBack)
 		{
-			txtbPrenom.Text = (string)Session["Prénom"];
-			txtbNom.Text = (string)Session["Nom"];
-			txtbNoMembre.Text = (string)Session["Numéro"];
+			if (txtbPrenom.Text == "" && Session["Prénom"] != null)
+			{
+				txtbPrenom.Text = (string)Session["Prénom"];
+			}
+
+			if (txtbNom.Text == "" && Session["Nom"] != null)
+			{
+				txtbNom.Text = (string)Session["Nom"];
+			}
+
+			if (txtbNoMembre.Text == "" && Session["Numéro"] != null)
+			{
+				txtbNoMembre.Text = (string)Session["Numéro"];
+			}
 		}
 	}
 
@@ -172,11 +184,27 @@ public partial class TP2 : System.Web.UI.Page
 
 	protected void btnConfirmer_Click(object sender, EventArgs e)
 	{
-		Session["Nom"] = txtbNom.Text;
-		Session["Prénom"] = txtbPrenom.Text;
-		Session["Numéro"] = txtbNoMembre.Text;
-		Session["Inscriptions"] = inscriptions;
-		Response.Redirect("Resume.aspx");
+		if (Page.IsValid)
+		{
+			Session["Nom"] = txtbNom.Text;
+			Session["Prénom"] = txtbPrenom.Text;
+			Session["Numéro"] = txtbNoMembre.Text;
+			Session["Inscriptions"] = inscriptions;
+			Response.Redirect("Resume.aspx");
+		}
+	}
+
+	protected void cvNumero_ServerValidate(object source, ServerValidateEventArgs args)
+	{
+		args.IsValid = false;
+		if (txtbPrenom.Text.Length > 0 && txtbNom.Text.Length > 0 && args.Value.Length == 10)
+		{
+			Regex regexp = new Regex(txtbPrenom.Text.Substring(0, 1) + txtbNom.Text.Substring(0, 1) + "\\d{8}", RegexOptions.IgnoreCase);
+			if (regexp.IsMatch(args.Value))
+			{
+				args.IsValid = true;
+			}
+		}
 	}
 	#endregion
 

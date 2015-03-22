@@ -6,6 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link rel="stylesheet" type="text/css" href="CSS/Styles.css"/>
+	<script src="JavaScript/Validator.js"></script>
 	<title>GAME ON!</title>
 </head>
 <body>
@@ -53,7 +54,7 @@
 				<asp:Label ID="lblInformations" runat="server" CssClass="subTitles" Text="Informations :"></asp:Label>
 				<br />
 				<asp:Label ID="lblPrenom" runat="server" CssClass="informations" Text="Prénom :"></asp:Label>
-				<asp:TextBox ID="txtbPrenom" runat="server" CssClass="informations" ValidationGroup="validate"></asp:TextBox>
+				<asp:TextBox ID="txtbPrenom" runat="server" CssClass="informations"></asp:TextBox>
 				<asp:RequiredFieldValidator ID="rfvPrenom" runat="server" ControlToValidate="txtbPrenom" Display="None" ErrorMessage="Veuillez entrer votre prénom s.v.p. " SetFocusOnError="True" ValidationGroup="validate"></asp:RequiredFieldValidator>
 				<br />
 				<asp:Label ID="lblNom" runat="server" CssClass="informations" Text="Nom :"></asp:Label>
@@ -63,6 +64,7 @@
 				<asp:Label ID="lblNoMembre" runat="server" CssClass="informations" Text="Numéro de membre :"></asp:Label>
 				<asp:TextBox ID="txtbNoMembre" runat="server" CssClass="informations"></asp:TextBox>
 				<asp:RequiredFieldValidator ID="rfvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Veuillez entrer votre numéro de membre s.v.p. " ValidationGroup="validate"></asp:RequiredFieldValidator>
+				<asp:CustomValidator ID="cvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Le numéro de membre doit être composé de la première lettre de votre prénom et de votre nom et de 8 numéros. " ValidationGroup="validate" ClientValidationFunction="validerNumeroMembre" OnServerValidate="cvNumero_ServerValidate" SetFocusOnError="True"></asp:CustomValidator>
 				<asp:ValidationSummary ID="vsResumerValidation" runat="server" DisplayMode="List" ForeColor="Red" ValidationGroup="validate" />
 			</asp:Panel>
 			<asp:Button ID="btnConfirmer" runat="server" Text="Confirmer" OnClick="btnConfirmer_Click" CssClass="button" ValidationGroup="validate" />
