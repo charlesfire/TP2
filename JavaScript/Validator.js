@@ -33,3 +33,15 @@ function validerNbMaxIncriptionParEvenement(source, args)
 		args.IsValid = false;
 	}
 }
+
+function validerNbMinInscription(source, args)
+{
+	var cblInscriptions = document.getElementById("cblInscriptions");
+	args.IsValid = false;
+	if (cblInscriptions)
+	{
+		var inscriptions = cblInscriptions.getElementsByTagName("LABEL");
+
+		args.IsValid = inscriptions.length >= 1;
+	}
+}

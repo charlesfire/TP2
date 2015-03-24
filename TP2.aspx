@@ -39,8 +39,9 @@
 				<asp:Label ID="lblHeure" runat="server" Text="Heure : "></asp:Label>
 				<asp:DropDownList ID="ddlHeure" runat="server">
 				</asp:DropDownList>
-				<asp:Button ID="btnAjouter" runat="server" Text="Ajouter" OnClick="btnAjouter_Click" CssClass="button" ValidationGroup="validate2" />
-				<asp:CustomValidator ID="cvNbMaxInscriptionParEvenement" runat="server" ValidationGroup="validate2" ClientValidationFunction="validerNbMaxIncriptionParEvenement" ErrorMessage="Vous ne pouvez pas avoir plus de 6 match par évènement."></asp:CustomValidator>
+				<asp:Button ID="btnAjouter" runat="server" Text="Ajouter" OnClick="btnAjouter_Click" CssClass="button" ValidationGroup="validerAjoutInscription" />
+				<asp:CustomValidator ID="cvNbMaxInscriptionParEvenement" runat="server" ValidationGroup="validerAjoutInscription" ClientValidationFunction="validerNbMaxIncriptionParEvenement" ErrorMessage="Vous ne pouvez pas avoir plus de 6 match par évènement." OnServerValidate="cvNbMaxInscriptionParEvenement_ServerValidate" Display="None"></asp:CustomValidator>
+				<asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="List" ForeColor="Red" ValidationGroup="validerAjoutInscription" />
 				<br />
 			</asp:Panel>
 			<br />
@@ -59,19 +60,20 @@
 				<br />
 				<asp:Label ID="lblPrenom" runat="server" CssClass="informations" Text="Prénom :"></asp:Label>
 				<asp:TextBox ID="txtbPrenom" runat="server" CssClass="informations"></asp:TextBox>
-				<asp:RequiredFieldValidator ID="rfvPrenom" runat="server" ControlToValidate="txtbPrenom" Display="None" ErrorMessage="Veuillez entrer votre prénom s.v.p. " SetFocusOnError="True" ValidationGroup="validate"></asp:RequiredFieldValidator>
+				<asp:RequiredFieldValidator ID="rfvPrenom" runat="server" ControlToValidate="txtbPrenom" Display="None" ErrorMessage="Veuillez entrer votre prénom s.v.p. " SetFocusOnError="True" ValidationGroup="validerDocument"></asp:RequiredFieldValidator>
 				<br />
 				<asp:Label ID="lblNom" runat="server" CssClass="informations" Text="Nom :"></asp:Label>
 				<asp:TextBox ID="txtbNom" runat="server" CssClass="informations"></asp:TextBox>
-				<asp:RequiredFieldValidator ID="rfvNom" runat="server" ControlToValidate="txtbNom" Display="None" ErrorMessage="Veuillez entrer votre nom s.v.p. " SetFocusOnError="True" ValidationGroup="validate"></asp:RequiredFieldValidator>
+				<asp:RequiredFieldValidator ID="rfvNom" runat="server" ControlToValidate="txtbNom" Display="None" ErrorMessage="Veuillez entrer votre nom s.v.p. " SetFocusOnError="True" ValidationGroup="validerDocument"></asp:RequiredFieldValidator>
 				<br />
 				<asp:Label ID="lblNoMembre" runat="server" CssClass="informations" Text="Numéro de membre :"></asp:Label>
 				<asp:TextBox ID="txtbNoMembre" runat="server" CssClass="informations"></asp:TextBox>
-				<asp:RequiredFieldValidator ID="rfvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Veuillez entrer votre numéro de membre s.v.p. " ValidationGroup="validate"></asp:RequiredFieldValidator>
-				<asp:CustomValidator ID="cvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Le numéro de membre doit être composé de la première lettre de votre prénom et de votre nom et de 8 numéros. " ValidationGroup="validate" ClientValidationFunction="validerNumeroMembre" OnServerValidate="cvNumero_ServerValidate" SetFocusOnError="True"></asp:CustomValidator>
-				<asp:ValidationSummary ID="vsResumerValidation" runat="server" DisplayMode="List" ForeColor="Red" ValidationGroup="validate" />
+				<asp:RequiredFieldValidator ID="rfvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Veuillez entrer votre numéro de membre s.v.p. " ValidationGroup="validerDocument"></asp:RequiredFieldValidator>
+				<asp:CustomValidator ID="cvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Le numéro de membre doit être composé de la première lettre de votre prénom et de votre nom et de 8 numéros. " ValidationGroup="validerDocument" ClientValidationFunction="validerNumeroMembre" OnServerValidate="cvNumero_ServerValidate" SetFocusOnError="True"></asp:CustomValidator>
+				<asp:ValidationSummary ID="vsResumerValidation" runat="server" DisplayMode="List" ForeColor="Red" ValidationGroup="validerDocument" />
 			</asp:Panel>
-			<asp:Button ID="btnConfirmer" runat="server" Text="Confirmer" OnClick="btnConfirmer_Click" CssClass="button" ValidationGroup="validate" />
+			<asp:CustomValidator ID="cvNbMinimumMatch" runat="server" ClientValidationFunction="validerNbMinInscription" Display="None" ErrorMessage="Vous devez vous inscrire à au moins un match." OnServerValidate="cvNbMinimumMatch_ServerValidate" ValidationGroup="validerDocument"></asp:CustomValidator>
+			<asp:Button ID="btnConfirmer" runat="server" Text="Confirmer" OnClick="btnConfirmer_Click" CssClass="button" ValidationGroup="validerDocument" />
 			<asp:Button ID="btnAnnuler" runat="server" Text="Annuler" OnClick="btnAnnuler_Click" CssClass="button" EnableTheming="True" />
 		</div>
 	</form>

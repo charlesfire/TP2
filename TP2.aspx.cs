@@ -158,22 +158,26 @@ public partial class TP2 : System.Web.UI.Page
 
 	protected void btnAjouter_Click(object sender, EventArgs e)
 	{
-		Inscription nouvelleInscription = new Inscription();
-
-		nouvelleInscription.SetEvenement(lblEvenement.Text);
-		nouvelleInscription.SetJeu(ddlJeu.SelectedValue);
-		nouvelleInscription.SetPlancher(int.Parse(ddlPlancher.SelectedValue));
-
-		DateTime date = new DateTime();
-		if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
+		Page.Validate("validerAjoutInscription");
+		if (Page.IsValid)
 		{
-			nouvelleInscription.SetDate(new DateTime(calendrierEvenement.SelectedDate.Year, calendrierEvenement.SelectedDate.Month,
-														calendrierEvenement.SelectedDate.Day, date.Hour, date.Minute, date.Second));
-		}
-		cblInscriptions.Items.Add(nouvelleInscription.ToString());
+			Inscription nouvelleInscription = new Inscription();
 
-		inscriptions.Add(nouvelleInscription);
-		pnlEditionInscription.Visible = true;
+			nouvelleInscription.SetEvenement(lblEvenement.Text);
+			nouvelleInscription.SetJeu(ddlJeu.SelectedValue);
+			nouvelleInscription.SetPlancher(int.Parse(ddlPlancher.SelectedValue));
+
+			DateTime date = new DateTime();
+			if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
+			{
+				nouvelleInscription.SetDate(new DateTime(calendrierEvenement.SelectedDate.Year, calendrierEvenement.SelectedDate.Month,
+															calendrierEvenement.SelectedDate.Day, date.Hour, date.Minute, date.Second));
+			}
+			cblInscriptions.Items.Add(nouvelleInscription.ToString());
+
+			inscriptions.Add(nouvelleInscription);
+			pnlEditionInscription.Visible = true;
+		}
 	}
 
 	protected void btnAnnuler_Click(object sender, EventArgs e)
@@ -185,6 +189,7 @@ public partial class TP2 : System.Web.UI.Page
 
 	protected void btnConfirmer_Click(object sender, EventArgs e)
 	{
+		Page.Validate("validerDocument");
 		if (Page.IsValid)
 		{
 			Session["Nom"] = txtbNom.Text;
@@ -206,6 +211,28 @@ public partial class TP2 : System.Web.UI.Page
 				args.IsValid = true;
 			}
 		}
+	}
+
+	protected void cvNbMaxInscriptionParEvenement_ServerValidate(object source, ServerValidateEventArgs args)
+	{
+		string evenements = "";
+
+		for (int i = 0; i < inscriptions.Count; i++)
+		{
+			evenements += inscriptions[i].GetEvenement();
+		}
+
+		args.IsValid = true;
+		Regex regexp = new Regex(lblEvenement.Text);
+		if (regexp.Matches(evenements).Count >= 6)
+		{
+			args.IsValid = false;
+		}
+	}
+
+	protected void cvNbMinimumMatch_ServerValidate(object source, ServerValidateEventArgs args)
+	{
+		args.IsValid = inscriptions.Count >= 1;
 	}
 	#endregion
 
