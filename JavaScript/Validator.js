@@ -17,20 +17,21 @@
 
 function validerNbMaxIncriptionParEvenement(source, args)
 {
-	var cblInscriptions = document.getElementById("cblInscriptions");
-	var inscriptions = cblInscriptions.getElementsByTagName("LABEL");
-	var evenementSelectionne = document.getElementById("lblEvenement");
-	var evenements = "";
-
-	for (var i = 0; i < inscriptions.length; i++)
-	{
-		evenements += inscriptions[i].innerHTML.split(" | ")[0];
-	}
-
 	args.IsValid = true;
-	if (evenements.match(new RegExp(evenementSelectionne.innerHTML, "g")).length >= 6)
+	var cblInscriptions = document.getElementById("cblInscriptions");
+	if (cblInscriptions)
 	{
-		args.IsValid = false;
+		var inscriptions = cblInscriptions.getElementsByTagName("LABEL");
+		var evenementSelectionne = document.getElementById("lblEvenement");
+		var evenements = "";
+
+		for (var i = 0; i < inscriptions.length; i++) {
+			evenements += inscriptions[i].innerHTML.split(" | ")[0];
+		}
+
+		if (evenements.match(new RegExp(evenementSelectionne.innerHTML, "g")).length >= 6) {
+			args.IsValid = false;
+		}
 	}
 }
 
@@ -43,5 +44,30 @@ function validerNbMinInscription(source, args)
 		var inscriptions = cblInscriptions.getElementsByTagName("LABEL");
 
 		args.IsValid = inscriptions.length >= 1;
+	}
+}
+
+function validerInscriptionsMemeHeure(source, args)
+{
+	args.IsValid = true;
+	var cblInscriptions = document.getElementById("cblInscriptions");
+	if (cblInscriptions)
+	{
+		var date = $("#calendrierEvenement > tbody > tr:nth-child(1) > td > table > tbody > tr > td")[0].innerHTML;
+		date = $("#calendrierEvenement a[style*='color:White']")[0].innerHTML + " " + date;
+		var heure = document.getElementById("ddlHeure").value;
+		var inscriptions = cblInscriptions.getElementsByTagName("LABEL");
+		var evenements = "";
+
+		for (var i = 0; i < inscriptions.length; i++)
+		{
+			evenements += inscriptions[i].innerHTML;
+		}
+
+		var dateEtHeure = "Date : " + date + " \\| Heure : " + heure;
+		if (evenements.match(new RegExp(dateEtHeure)))
+		{
+			args.IsValid = false;
+		}
 	}
 }

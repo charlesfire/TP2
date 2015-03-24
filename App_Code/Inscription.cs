@@ -63,6 +63,6 @@ public class Inscription
 
 	public override string ToString()
 	{
-		return "Événement : " + evenement + " | Jeu : " + jeu + " | Plancher #" + plancher + " | Date : " + date.ToString();
+		return "Événement : " + evenement + " | Jeu : " + jeu + " | Plancher #" + plancher + " | Date : " + date.ToLongDateString() + " | Heure : " + date.ToShortTimeString();
 	}
 }
