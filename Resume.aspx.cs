@@ -33,7 +33,7 @@ public partial class Resume : System.Web.UI.Page
 				nouvelleLigne.Cells.Add(nouvelleCellule);
 
 				nouvelleCellule = new TableCell();
-				nouvelleCellule.Text = inscription.GetHeure().ToShortDateString() + " " + inscription.GetHeure().ToShortTimeString();
+				nouvelleCellule.Text = inscription.GetDate().ToShortDateString() + " " + inscription.GetDate().ToShortTimeString();
 				nouvelleLigne.Cells.Add(nouvelleCellule);
 
 				tbInscriptions.Rows.Add(nouvelleLigne);

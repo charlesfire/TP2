@@ -27,9 +27,9 @@
 				<TitleStyle Font-Bold="True" />
 			</asp:Calendar>
 			<br />
-			<asp:Label ID="lblEvenement" runat="server" CssClass="subTitles"></asp:Label>
-			<br />
 			<asp:Panel ID="pnlEvenement" runat="server" Visible="False" CssClass="pnl">
+				<asp:Label ID="lblEvenement" runat="server" CssClass="subTitles"></asp:Label>
+				<br />
 				<asp:Label ID="lblJeu" runat="server" Text="Jeu : "></asp:Label>
 				<asp:DropDownList ID="ddlJeu" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlJeu_SelectedIndexChanged">
 				</asp:DropDownList>
@@ -39,18 +39,22 @@
 				<asp:Label ID="lblHeure" runat="server" Text="Heure : "></asp:Label>
 				<asp:DropDownList ID="ddlHeure" runat="server">
 				</asp:DropDownList>
-				<asp:Button ID="btnAjouter" runat="server" Text="Ajouter" OnClick="btnAjouter_Click" CssClass="button" />
-				<br />
+				<asp:Button ID="btnAjouter" runat="server" Text="Ajouter" OnClick="btnAjouter_Click" CssClass="button" ValidationGroup="validate2" />
+				<asp:CustomValidator ID="cvNbMaxInscriptionParEvenement" runat="server" ValidationGroup="validate2" ClientValidationFunction="validerNbMaxIncriptionParEvenement" ErrorMessage="Vous ne pouvez pas avoir plus de 6 match par évènement."></asp:CustomValidator>
 				<br />
 			</asp:Panel>
-			<asp:Panel ID="pnlInformations" runat="server" CssClass="pnl">
-				<asp:Panel ID="pnlEditionInscription" runat="server" CssClass="pnl" Visible="False">
-					<asp:Label ID="lblVosInscriptions" runat="server" CssClass="subTitles" Text="Vos inscriptions"></asp:Label>
-					<asp:CheckBoxList ID="cblInscriptions" runat="server" Enabled="False">
-					</asp:CheckBoxList>
-					<asp:Button ID="btnModifier" runat="server" CssClass="alignLeft button" OnClick="btnModifier_Click" Text="Modifier" />
-					<asp:Button ID="btnSuprimerSelection" runat="server" CssClass="alignLeft button" OnClick="btnSuprimerSelection_Click" Text="Suprimer la sélection" Visible="False" />
+			<br />
+			<br />
+			<asp:Panel ID="pnlEditionInscription" runat="server" CssClass="pnl" Visible="False">
+				<asp:Label ID="lblVosInscriptions" runat="server" CssClass="subTitles" Text="Vos inscriptions"></asp:Label>
+				<asp:CheckBoxList ID="cblInscriptions" runat="server" Enabled="False">
+				</asp:CheckBoxList>
+				<asp:Button ID="btnModifier" runat="server" CssClass="alignLeft button" OnClick="btnModifier_Click" Text="Modifier" />
+				<asp:Button ID="btnSuprimerSelection" runat="server" CssClass="alignLeft button" OnClick="btnSuprimerSelection_Click" Text="Suprimer la sélection" Visible="False" />
 				</asp:Panel>
+			<br />
+			<br />
+			<asp:Panel ID="pnlInformations" runat="server" CssClass="pnl">
 				<asp:Label ID="lblInformations" runat="server" CssClass="subTitles" Text="Informations :"></asp:Label>
 				<br />
 				<asp:Label ID="lblPrenom" runat="server" CssClass="informations" Text="Prénom :"></asp:Label>

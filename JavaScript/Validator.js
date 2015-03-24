@@ -14,3 +14,22 @@
 		}
 	}
 }
+
+function validerNbMaxIncriptionParEvenement(source, args)
+{
+	var cblInscriptions = document.getElementById("cblInscriptions");
+	var inscriptions = cblInscriptions.getElementsByTagName("LABEL");
+	var evenementSelectionne = document.getElementById("lblEvenement");
+	var evenements = "";
+
+	for (var i = 0; i < inscriptions.length; i++)
+	{
+		evenements += inscriptions[i].innerHTML.split(" | ")[0];
+	}
+
+	args.IsValid = true;
+	if (evenements.match(new RegExp(evenementSelectionne.innerHTML, "g")).length >= 6)
+	{
+		args.IsValid = false;
+	}
+}

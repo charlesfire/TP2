@@ -167,10 +167,11 @@ public partial class TP2 : System.Web.UI.Page
 		DateTime date = new DateTime();
 		if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
 		{
-			nouvelleInscription.SetHeure(new DateTime(calendrierEvenement.SelectedDate.Year, calendrierEvenement.SelectedDate.Month,
+			nouvelleInscription.SetDate(new DateTime(calendrierEvenement.SelectedDate.Year, calendrierEvenement.SelectedDate.Month,
 														calendrierEvenement.SelectedDate.Day, date.Hour, date.Minute, date.Second));
 		}
 		cblInscriptions.Items.Add(nouvelleInscription.ToString());
+
 		inscriptions.Add(nouvelleInscription);
 		pnlEditionInscription.Visible = true;
 	}

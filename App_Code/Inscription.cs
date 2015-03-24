@@ -11,14 +11,14 @@ public class Inscription
 	private string evenement = "";
 	private string jeu = "";
 	private int plancher = -1;
-	private DateTime heure = new DateTime(1, 1, 1);
+	private DateTime date = new DateTime(1, 1, 1);
 
 	public Inscription()
 	{
 		evenement = "";
 		jeu = "";
 		plancher = -1;
-		heure = new DateTime(1, 1, 1);
+		date = new DateTime(1, 1, 1);
 	}
 
 	public string GetEvenement()
@@ -51,18 +51,18 @@ public class Inscription
 		this.plancher = plancher;
 	}
 
-	public DateTime GetHeure()
+	public DateTime GetDate()
 	{
-		return heure;
+		return date;
 	}
 
-	public void SetHeure(DateTime heure)
+	public void SetDate(DateTime date)
 	{
-		this.heure = heure;
+		this.date = date;
 	}
 
 	public override string ToString()
 	{
-		return "Événement : " + evenement + " | Jeu : " + jeu + " | Plancher #" + plancher + " | Date : " + heure.ToString();
+		return "Événement : " + evenement + " | Jeu : " + jeu + " | Plancher #" + plancher + " | Date : " + date.ToString();
 	}
 }
