@@ -41,7 +41,7 @@
 				<asp:DropDownList ID="ddlHeure" runat="server">
 				</asp:DropDownList>
 				<asp:Button ID="btnAjouter" runat="server" Text="Ajouter" OnClick="btnAjouter_Click" CssClass="button" ValidationGroup="validerAjoutInscription" />
-				<asp:CustomValidator ID="cvInscriptionsMemeHeure" runat="server" Display="None" ErrorMessage="Vous ne pouvez pas vous inscrire à deux matchs se passant en même temps." ValidationGroup="validerAjoutInscription" ClientValidationFunction="validerInscriptionsMemeHeure"></asp:CustomValidator>
+				<asp:CustomValidator ID="cvInscriptionsMemeHeure" runat="server" Display="None" ErrorMessage="Vous ne pouvez pas vous inscrire à deux matchs se passant en même temps." ValidationGroup="validerAjoutInscription" ClientValidationFunction="validerInscriptionsMemeHeure" OnServerValidate="cvInscriptionsMemeHeure_ServerValidate"></asp:CustomValidator>
 				<asp:CustomValidator ID="cvNbMaxInscriptionParEvenement" runat="server" ValidationGroup="validerAjoutInscription" ClientValidationFunction="validerNbMaxIncriptionParEvenement" ErrorMessage="Vous ne pouvez pas avoir plus de 6 match par évènement." OnServerValidate="cvNbMaxInscriptionParEvenement_ServerValidate" Display="None"></asp:CustomValidator>
 				<asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="List" ForeColor="Red" ValidationGroup="validerAjoutInscription" />
 				<br />

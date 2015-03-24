@@ -234,6 +234,24 @@ public partial class TP2 : System.Web.UI.Page
 	{
 		args.IsValid = inscriptions.Count >= 1;
 	}
+
+	protected void cvInscriptionsMemeHeure_ServerValidate(object source, ServerValidateEventArgs args)
+	{
+		args.IsValid = true;
+		for (int i = 0; i < inscriptions.Count; i ++)
+		{
+			DateTime date = new DateTime();
+			if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
+			{
+				date = new DateTime(calendrierEvenement.SelectedDate.Year, calendrierEvenement.SelectedDate.Month,
+															calendrierEvenement.SelectedDate.Day, date.Hour, date.Minute, date.Second);
+				if(inscriptions[i].GetDate() == date)
+				{
+					args.IsValid = false;
+				}
+			}
+		}
+	}
 	#endregion
 
 	#region Vincent
