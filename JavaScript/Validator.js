@@ -15,7 +15,7 @@
 	}
 }
 
-function validerNbMaxIncriptionParEvenement(source, args)
+function validerNbMaxIncriptionsParEvenement(source, args)
 {
 	args.IsValid = true;
 	var cblInscriptions = document.getElementById("cblInscriptions");
@@ -64,8 +64,31 @@ function validerInscriptionsMemeHeure(source, args)
 			evenements += inscriptions[i].innerHTML;
 		}
 
-		var dateEtHeure = "Date : " + date + " \\| Heure : " + heure;
-		if (evenements.match(new RegExp(dateEtHeure)))
+		if (evenements.match(new RegExp("Date : " + date + " \\| Heure : " + heure)))
+		{
+			args.IsValid = false;
+		}
+	}
+}
+
+function validerNbMaxInscriptionsParPlancherParJour(source, args)
+{
+	args.IsValid = true;
+	var cblInscriptions = document.getElementById("cblInscriptions");
+	if (cblInscriptions)
+	{
+		var date = $("#calendrierEvenement > tbody > tr:nth-child(1) > td > table > tbody > tr > td")[0].innerHTML;
+		date = "Date : " + $("#calendrierEvenement a[style*='color:White']")[0].innerHTML + " " + date;
+		var plancher = "Plancher #" + document.getElementById("ddlPlancher").value;
+		var inscriptions = cblInscriptions.getElementsByTagName("LABEL");
+		var evenements = "";
+
+		for (var i = 0; i < inscriptions.length; i++)
+		{
+			evenements += inscriptions[i].innerHTML;
+		}
+
+		if (evenements.match(new RegExp(plancher + " \\| " + date, "g")).length >= 3)
 		{
 			args.IsValid = false;
 		}

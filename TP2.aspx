@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link rel="stylesheet" type="text/css" href="CSS/Styles.css"/>
 	<script src="JavaScript/Validator.js"></script>
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="JavaScript/jquery-2.1.3.min.js"></script>
 	<title>GAME ON!</title>
 </head>
 <body>
@@ -42,7 +42,8 @@
 				</asp:DropDownList>
 				<asp:Button ID="btnAjouter" runat="server" Text="Ajouter" OnClick="btnAjouter_Click" CssClass="button" ValidationGroup="validerAjoutInscription" />
 				<asp:CustomValidator ID="cvInscriptionsMemeHeure" runat="server" Display="None" ErrorMessage="Vous ne pouvez pas vous inscrire à deux matchs se passant en même temps." ValidationGroup="validerAjoutInscription" ClientValidationFunction="validerInscriptionsMemeHeure" OnServerValidate="cvInscriptionsMemeHeure_ServerValidate"></asp:CustomValidator>
-				<asp:CustomValidator ID="cvNbMaxInscriptionParEvenement" runat="server" ValidationGroup="validerAjoutInscription" ClientValidationFunction="validerNbMaxIncriptionParEvenement" ErrorMessage="Vous ne pouvez pas avoir plus de 6 match par évènement." OnServerValidate="cvNbMaxInscriptionParEvenement_ServerValidate" Display="None"></asp:CustomValidator>
+				<asp:CustomValidator ID="cvNbMaxInscriptionsParEvenement" runat="server" ValidationGroup="validerAjoutInscription" ClientValidationFunction="validerNbMaxIncriptionsParEvenement" ErrorMessage="Vous ne pouvez pas avoir plus de 6 match par évènement." OnServerValidate="cvNbMaxInscriptionsParEvenement_ServerValidate" Display="None"></asp:CustomValidator>
+				<asp:CustomValidator ID="cvNbMaxInscriptionsParPlancher" runat="server" ClientValidationFunction="validerNbMaxInscriptionsParPlancherParJour" Display="None" ErrorMessage="Vous ne pouvez pas vous inscrire à plus de trois matchs par plancher par jour." ValidationGroup="validerAjoutInscription" OnServerValidate="cvNbMaxInscriptionsParPlancher_ServerValidate"></asp:CustomValidator>
 				<asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="List" ForeColor="Red" ValidationGroup="validerAjoutInscription" />
 				<br />
 			</asp:Panel>
@@ -77,6 +78,16 @@
 			<asp:CustomValidator ID="cvNbMinimumMatch" runat="server" ClientValidationFunction="validerNbMinInscription" Display="None" ErrorMessage="Vous devez vous inscrire à au moins un match." OnServerValidate="cvNbMinimumMatch_ServerValidate" ValidationGroup="validerDocument"></asp:CustomValidator>
 			<asp:Button ID="btnConfirmer" runat="server" Text="Confirmer" OnClick="btnConfirmer_Click" CssClass="button" ValidationGroup="validerDocument" />
 			<asp:Button ID="btnAnnuler" runat="server" Text="Annuler" OnClick="btnAnnuler_Click" CssClass="button" EnableTheming="True" />
+			<br />
+			<br />
+			<asp:Label ID="lblAssocies" runat="server" CssClass="subTitles" Text="Nos associés"></asp:Label>
+			<br />
+			<asp:Image ID="imgLogoSteam" runat="server" Height="78px" ImageUrl="~/Images/LogoDota.png" />
+			<asp:Image ID="Image1" runat="server" Height="78px" ImageUrl="~/Images/LogoSteam.png" />
+			<asp:Image ID="Image2" runat="server" Height="78px" ImageUrl="~/Images/LogoRiot.jpg" />
+			<br />
+			<br />
+			<a id="mail" href="mailto:this@isFake.com">Nous contacter</a>
 		</div>
 	</form>
 </body>

@@ -213,7 +213,7 @@ public partial class TP2 : System.Web.UI.Page
 		}
 	}
 
-	protected void cvNbMaxInscriptionParEvenement_ServerValidate(object source, ServerValidateEventArgs args)
+	protected void cvNbMaxInscriptionsParEvenement_ServerValidate(object source, ServerValidateEventArgs args)
 	{
 		string evenements = "";
 
@@ -238,17 +238,45 @@ public partial class TP2 : System.Web.UI.Page
 	protected void cvInscriptionsMemeHeure_ServerValidate(object source, ServerValidateEventArgs args)
 	{
 		args.IsValid = true;
-		for (int i = 0; i < inscriptions.Count; i ++)
+		DateTime date = new DateTime();
+		if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
 		{
-			DateTime date = new DateTime();
-			if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
+			date = new DateTime(calendrierEvenement.SelectedDate.Year, calendrierEvenement.SelectedDate.Month,
+														calendrierEvenement.SelectedDate.Day, date.Hour, date.Minute, date.Second);
+
+			for (int i = 0; i < inscriptions.Count; i ++)
 			{
-				date = new DateTime(calendrierEvenement.SelectedDate.Year, calendrierEvenement.SelectedDate.Month,
-															calendrierEvenement.SelectedDate.Day, date.Hour, date.Minute, date.Second);
 				if(inscriptions[i].GetDate() == date)
 				{
 					args.IsValid = false;
 				}
+			}
+		}
+	}
+
+	protected void cvNbMaxInscriptionsParPlancher_ServerValidate(object source, ServerValidateEventArgs args)
+	{
+		args.IsValid = true;
+		DateTime date = new DateTime();
+		if (DateTime.TryParse(ddlHeure.SelectedValue, out date))
+		{
+			date = new DateTime(calendrierEvenement.SelectedDate.Year, calendrierEvenement.SelectedDate.Month,
+														calendrierEvenement.SelectedDate.Day, date.Hour, date.Minute, date.Second);
+
+			int numeroPlancher = int.Parse(ddlPlancher.SelectedValue);
+			int nbInscription = 0;
+
+			for (int i = 0; i < inscriptions.Count; i++)
+			{
+				if (inscriptions[i].GetDate().Date == date.Date && inscriptions[i].GetPlancher() == numeroPlancher)
+				{
+					nbInscription++;
+				}
+			}
+
+			if (nbInscription >= 3)
+			{
+				args.IsValid = false;
 			}
 		}
 	}
