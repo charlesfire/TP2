@@ -11,7 +11,8 @@ public partial class Resume : System.Web.UI.Page
 	{
 		lblPrenom.Text = (string)Session["Prénom"];
 		lblNom.Text = (string)Session["Nom"];
-		lblNumero.Text = (string)Session["Numéro"];
+		lblNumero.Text = lblPrenom.Text + " " + lblNom.Text + "<br />#" + (string)Session["Numéro"];
+		lblDate.Text = DateTime.Now.ToLongDateString() + " à " + DateTime.Now.ToShortTimeString();
 
 		List<Inscription> inscriptions = (List<Inscription>)Session["Inscriptions"];
 		if (inscriptions != null)
@@ -29,11 +30,15 @@ public partial class Resume : System.Web.UI.Page
 				nouvelleLigne.Cells.Add(nouvelleCellule);
 
 				nouvelleCellule = new TableCell();
-				nouvelleCellule.Text = "Plancher #" + inscription.GetPlancher();
+				nouvelleCellule.Text = "#" + inscription.GetPlancher();
 				nouvelleLigne.Cells.Add(nouvelleCellule);
 
 				nouvelleCellule = new TableCell();
-				nouvelleCellule.Text = inscription.GetDate().ToShortDateString() + " " + inscription.GetDate().ToShortTimeString();
+				nouvelleCellule.Text = inscription.GetDate().ToLongDateString();
+				nouvelleLigne.Cells.Add(nouvelleCellule);
+
+				nouvelleCellule = new TableCell();
+				nouvelleCellule.Text = inscription.GetDate().ToShortTimeString();
 				nouvelleLigne.Cells.Add(nouvelleCellule);
 
 				tbInscriptions.Rows.Add(nouvelleLigne);

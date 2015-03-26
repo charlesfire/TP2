@@ -14,11 +14,11 @@
 	<form id="form1" runat="server">
 		<div id = "main">
 			<h1>GAME ON!</h1>
-			<p>
+			<p class="maxWidth">
 				Cliquez sur la date où le tournoi se déroule pour commencer,
 				les autres options s'afficheront ensuite. Pour s&#39;inscrire à une compétition, choisissez
 				votre jeu, le plancher où vous allez disputer votre match et l'heure à laquelle
-				cela se passera. Si vous souhaitez annuler un de vos matchs, cliquer sur modifier, sélectionner le/les match(s) que vous voulez suprimer et cliquer sur le boutton . Pour
+				cela se passera. Si vous souhaitez annuler un de vos matchs, cliquer sur modifier, sélectionner le/les match(s) que vous voulez suprimer et cliquer sur le boutton &quot;Suprimer la sélection&quot;. Pour
 				terminer votre inscription, remplissez les informations requisent et appuyez sur
 				confirmer.
 			</p>
@@ -61,18 +61,36 @@
 			<asp:Panel ID="pnlInformations" runat="server" CssClass="pnl">
 				<asp:Label ID="lblInformations" runat="server" CssClass="subTitles" Text="Informations :"></asp:Label>
 				<br />
-				<asp:Label ID="lblPrenom" runat="server" CssClass="informations" Text="Prénom :"></asp:Label>
-				<asp:TextBox ID="txtbPrenom" runat="server" CssClass="informations"></asp:TextBox>
-				<asp:RequiredFieldValidator ID="rfvPrenom" runat="server" ControlToValidate="txtbPrenom" Display="None" ErrorMessage="Veuillez entrer votre prénom s.v.p. " SetFocusOnError="True" ValidationGroup="validerDocument"></asp:RequiredFieldValidator>
-				<br />
-				<asp:Label ID="lblNom" runat="server" CssClass="informations" Text="Nom :"></asp:Label>
-				<asp:TextBox ID="txtbNom" runat="server" CssClass="informations"></asp:TextBox>
-				<asp:RequiredFieldValidator ID="rfvNom" runat="server" ControlToValidate="txtbNom" Display="None" ErrorMessage="Veuillez entrer votre nom s.v.p. " SetFocusOnError="True" ValidationGroup="validerDocument"></asp:RequiredFieldValidator>
-				<br />
-				<asp:Label ID="lblNoMembre" runat="server" CssClass="informations" Text="Numéro de membre :"></asp:Label>
-				<asp:TextBox ID="txtbNoMembre" runat="server" CssClass="informations"></asp:TextBox>
-				<asp:RequiredFieldValidator ID="rfvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Veuillez entrer votre numéro de membre s.v.p. " ValidationGroup="validerDocument"></asp:RequiredFieldValidator>
-				<asp:CustomValidator ID="cvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Le numéro de membre doit être composé de la première lettre de votre prénom et de votre nom et de 8 numéros. " ValidationGroup="validerDocument" ClientValidationFunction="validerNumeroMembre" OnServerValidate="cvNumero_ServerValidate" SetFocusOnError="True"></asp:CustomValidator>
+				<table id="tblInformations">
+					<tr>
+						<td class="alignRight">
+							<asp:Label ID="lblPrenom" runat="server" CssClass="informations" Text="Prénom :"></asp:Label>
+						</td>
+						<td>
+							<asp:TextBox ID="txtbPrenom" runat="server" CssClass="informations"></asp:TextBox>
+							<asp:RequiredFieldValidator ID="rfvPrenom" runat="server" ControlToValidate="txtbPrenom" Display="None" ErrorMessage="Veuillez entrer votre prénom s.v.p. " SetFocusOnError="True" ValidationGroup="validerDocument"></asp:RequiredFieldValidator>
+						</td>
+					</tr>
+					<tr>
+						<td class="alignRight">
+							<asp:Label ID="lblNom" runat="server" CssClass="informations" Text="Nom :"></asp:Label>
+						</td>
+						<td>
+							<asp:TextBox ID="txtbNom" runat="server" CssClass="informations"></asp:TextBox>
+							<asp:RequiredFieldValidator ID="rfvNom" runat="server" ControlToValidate="txtbNom" Display="None" ErrorMessage="Veuillez entrer votre nom s.v.p. " SetFocusOnError="True" ValidationGroup="validerDocument"></asp:RequiredFieldValidator>
+						</td>
+					</tr>
+					<tr>
+						<td class="alignRight">
+							<asp:Label ID="lblNoMembre" runat="server" CssClass="informations" Text="Numéro de membre :"></asp:Label>
+						</td>
+						<td>
+							<asp:TextBox ID="txtbNoMembre" runat="server" CssClass="informations"></asp:TextBox>
+							<asp:RequiredFieldValidator ID="rfvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Veuillez entrer votre numéro de membre s.v.p. " ValidationGroup="validerDocument"></asp:RequiredFieldValidator>
+							<asp:CustomValidator ID="cvNumero" runat="server" ControlToValidate="txtbNoMembre" Display="None" ErrorMessage="Le numéro de membre doit être composé de la première lettre de votre prénom et de votre nom et de 8 numéros. " ValidationGroup="validerDocument" ClientValidationFunction="validerNumeroMembre" OnServerValidate="cvNumero_ServerValidate" SetFocusOnError="True"></asp:CustomValidator>
+						</td>
+					</tr>
+				</table>
 				<asp:ValidationSummary ID="vsResumerValidation" runat="server" DisplayMode="List" ForeColor="Red" ValidationGroup="validerDocument" />
 			</asp:Panel>
 			<asp:CustomValidator ID="cvNbMinimumMatch" runat="server" ClientValidationFunction="validerNbMinInscription" Display="None" ErrorMessage="Vous devez vous inscrire à au moins un match." OnServerValidate="cvNbMinimumMatch_ServerValidate" ValidationGroup="validerDocument"></asp:CustomValidator>
