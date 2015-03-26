@@ -22,7 +22,7 @@ public partial class TP2 : System.Web.UI.Page
 
 
 	/// <summary>
-	/// Événement produit lors du chargement/rechargement/postback de la page
+	/// Fonction appelée lors du chargement/rechargement/postback de la page
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
@@ -107,7 +107,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lors d'un clique sur le bouton modifier
+	/// Fonction appelée lors d'un clique sur le bouton modifier
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
@@ -133,7 +133,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lors d'un clique sur le bouton suprimer
+	/// Fonction appelée lors d'un clique sur le bouton suprimer
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
@@ -167,7 +167,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lors du rendu d'une journée du calendrier
+	/// Fonction appelée lors du rendu d'une journée du calendrier
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
@@ -182,7 +182,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lorsque l'utilisateur sélectionne une date du calendrier
+	/// Fonction appelée lorsque l'utilisateur sélectionne une date du calendrier
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
@@ -201,7 +201,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lorsque l'utilisateur sélectionne un jeu
+	/// Fonction appelée lorsque l'utilisateur sélectionne un jeu
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
@@ -212,7 +212,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lorsque l'utilisateur clique sur le bouton "Ajouter"
+	/// Fonction appelée lorsque l'utilisateur clique sur le bouton "Ajouter"
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
@@ -251,7 +251,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lorsque l'utilisateur clique sur le bouton "Annuler"
+	/// Fonction appelée lorsque l'utilisateur clique sur le bouton "Annuler"
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
@@ -268,7 +268,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lorsque l'utilisateur clique sur le bouton "Comfirmer"
+	/// Fonction appelée lorsque l'utilisateur clique sur le bouton "Comfirmer"
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
@@ -292,13 +292,13 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lors de la validation du numéro du membre
+	/// Fonction appelée lors de la validation du numéro du membre
 	/// </summary>
 	/// <param name="source"></param>
 	/// <param name="args"></param>
 	protected void cvNumero_ServerValidate(object source, ServerValidateEventArgs args)
 	{
-		// On met le résultat de la validation à false
+		// On considère que le numéro de membre n'est pas valide à la base
 		args.IsValid = false;
 
 		// Si l'utilisateur a rentré un nom et un prénom et que le numéro de membre est de la bonne longeur...
@@ -310,19 +310,21 @@ public partial class TP2 : System.Web.UI.Page
 			// Si le numéro est valide...
 			if (regexp.IsMatch(args.Value))
 			{
-				// On met le résultat de la validation à true
 				args.IsValid = true;
 			}
 		}
 	}
 
 	/// <summary>
-	/// Événement produit lors de la validation du nombre maximal d'inscription par évènement
+	/// Fonction appelée lors de la validation du nombre maximal d'inscription par évènement
 	/// </summary>
 	/// <param name="source"></param>
 	/// <param name="args"></param>
 	protected void cvNbMaxInscriptionsParEvenement_ServerValidate(object source, ServerValidateEventArgs args)
 	{
+		// On considère qu'il n'y a pas plus de 6 match par évènement à la base
+		args.IsValid = true;
+
 		// Variable contenant l'ensemble des évènements sous forme de chaine de caractère
 		string evenements = "";
 
@@ -331,9 +333,6 @@ public partial class TP2 : System.Web.UI.Page
 		{
 			evenements += inscriptions[i].GetEvenement();
 		}
-
-		// On considère qu'il n'y a pas plus de 6 match par évènement à la base
-		args.IsValid = true;
 
 		// On génère une expression régulière pour compter le nombre de fois que l'utilisateur a souscrit à
 		//   un match faisant partit du même évènement
@@ -348,7 +347,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lors de la validation du nombre minimum d'inscription à des matchs
+	/// Fonction appelée lors de la validation du nombre minimum d'inscription à des matchs
 	/// </summary>
 	/// <param name="source"></param>
 	/// <param name="args"></param>
@@ -359,7 +358,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lors de la validation vérifiant si l'utilisateur ne s'est pas inscrit
+	/// Fonction appelée lors de la validation vérifiant si l'utilisateur ne s'est pas inscrit
 	///    deux fois à la même heure le même jour
 	/// </summary>
 	/// <param name="source"></param>
@@ -390,7 +389,7 @@ public partial class TP2 : System.Web.UI.Page
 	}
 
 	/// <summary>
-	/// Événement produit lors de la validation vérifiant si l'utilisateur s'est déjà inscrit à plus
+	/// Fonction appelée lors de la validation vérifiant si l'utilisateur s'est déjà inscrit à plus
 	///		de 3 match par plancher par jour
 	/// </summary>
 	/// <param name="source"></param>
